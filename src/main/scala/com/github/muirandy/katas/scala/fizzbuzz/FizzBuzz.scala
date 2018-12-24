@@ -9,11 +9,12 @@ object FizzBuzz {
   val nothing = (x: Int) => if (fizz(x).length == 0 && buzz(x).length == 0) x else ""
 
   def getResult(i: Int): String = {
-    return condOpt(i) {
+    i match {
       case x if (i % 15 == 0) => "fizzbuzz"
       case x if (i % 5 == 0) => "buzz"
       case x if (i % 3 == 0) => "fizz"
-    }.getOrElse("" + i)
+      case _ => "" + i
+    }
   }
 }
 
