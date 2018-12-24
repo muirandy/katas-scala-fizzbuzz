@@ -1,5 +1,7 @@
 package com.github.muirandy.katas.scala.fizzbuzz
 
+import PartialFunction._
+
 object FizzBuzz {
 
   val fizz = (x: Int) => if (x % 3 == 0) "fizz" else ""
@@ -7,7 +9,11 @@ object FizzBuzz {
   val nothing = (x: Int) => if (fizz(x).length == 0 && buzz(x).length == 0) x else ""
 
   def getResult(i: Int): String = {
-    return fizz(i) + buzz(i) + nothing(i)
+    return condOpt(i) {
+      case x if (i % 15 == 0) => "fizzbuzz"
+      case x if (i % 5 == 0) => "buzz"
+      case x if (i % 3 == 0) => "fizz"
+    }.getOrElse("" + i)
   }
 }
 
